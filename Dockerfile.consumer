@@ -10,7 +10,7 @@ RUN rpm --import https://packages.irods.org/irods-signing-key.asc && \
     yum install -y python-psutil python-jsonschema &&\
     yum install -y irods-server-4.2.5-1
 
-ADD run_irods_consumer.sh  /
+ADD run_irods_consumer.sh setup_consumer.input  /
 
 RUN chmod +x /run_irods_consumer.sh
 
