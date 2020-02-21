@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+
+  icatdb:
+    hostname: dbhost
+    build:
+        context: .
+        dockerfile: Dockerfile.postgres
+    networks:
+        default:
+            aliases:
+                [ "dbhost" ]
+
+  irodsprov:
+     hostname: irodshost
+     build:
+         context: .
+         dockerfile: Dockerfile.provider
+     networks:
+         default:
+             aliases:
+                 [ "irodshost" ]
+     depends_on:
+      - icatdb
+     cap_add:
+         - SYS_PTRACE
+ 
+  irodscons:
+    hostname: consumer
+    build:
+        context: .
+        dockerfile: Dockerfile.consumer
+    networks:
+        default:
+            aliases:
+                [ "consumer" ]
+    depends_on:
+     - irodsprov
+    cap_add:
+        - SYS_PTRACE
+ 
