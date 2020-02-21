@@ -29,7 +29,7 @@ then
 else
 
   echo >&2 "Starting iRODS ..."
-  service irods start
+  su - irods -c "/var/lib/irods/irodsctl start"
 
 fi && echo >&2  $'\n\t --> IRODS Server is running \n'
 
